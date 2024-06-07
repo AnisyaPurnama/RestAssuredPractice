@@ -7,9 +7,14 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
-
+  test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./reqres.api/
+
+    env:
+      MODE: "dev"
 
     steps:
       - uses: actions/checkout@v4
@@ -21,3 +26,5 @@ jobs:
           cache: maven
       - name: Build with Maven
         run: mvn -B package --file pom.xml
+      - name: Test Reqres Api Code
+        run: java ./GetAndPost.java
