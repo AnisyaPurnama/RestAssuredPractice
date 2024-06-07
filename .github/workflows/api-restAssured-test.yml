@@ -1,0 +1,25 @@
+name: Reqres Test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      MODE: "dev"
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 20
+        uses: actions/setup-java@v3
+        with:
+          java-version: '20'
+          distribution: 'temurin'
+          cache: maven
+      - name: Test Reqres Api Code
+        run: mvn -B test -Dtest=reqres.api.*
