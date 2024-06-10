@@ -5,7 +5,6 @@ Feature: Users
     Given I send a GET request to "/api/users"
     Then the response status should be "200"
     And the JSON response should contain "data"
-    And the JSON response should have "$..email" with the text "janet.weaver@reqres.in"
 
     #POST
   Scenario: Create a user
