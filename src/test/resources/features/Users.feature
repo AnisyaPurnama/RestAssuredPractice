@@ -3,14 +3,16 @@ Feature: Users
   #GET
   Scenario: Retrieve user details
     Given I send a GET request to "/api/users"
+    #TODO enum
     Then the response status should be "OK"
-    And the JSON response should contain "data"
+    And the JSON response should contain "DATA"
 
     #POST
   Scenario: Create a user
     Given I send a POST request to "/api/users" with the following data:
-      | name     | Ani Weet       |
-      | job      | QA Engineer    |
+    #TODO
+      | name | Ani Weet    |
+      | job  | QA Engineer |
     Then the response status should be "CREATED"
     And the JSON response should contain "CREATED USER"
 
@@ -39,15 +41,15 @@ Feature: Users
     #PUT
   Scenario: Update user details
     Given I send a PUT request to "/api/users/2" with the following data:
-      | name     | Updated Name   |
-      | job      | Updated Job    |
+      | name | Updated Name |
+      | job  | Updated Job  |
     Then the response status should be "OK"
     And the JSON response should contain "USER_UPDATED"
 
     #PATCH - Partial Update User Details
   Scenario: Partially update user details
     Given I send a PATCH request to "/api/users/2" with the following data:
-      | job      | Updated Job    |
+      | job | Updated Job |
     Then the response status should be "OK"
     And the JSON response should contain "USER_PARTIAL_UPDATE"
 

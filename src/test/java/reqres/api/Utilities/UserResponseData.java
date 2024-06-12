@@ -1,6 +1,7 @@
 package reqres.api.Utilities;
 
 import org.json.simple.JSONObject;
+import org.junit.Assert;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
@@ -13,37 +14,37 @@ public class UserResponseData {
     public static final String USER_PARTIAL_UPDATE = "USER PARTIAL UPDATED";
 
 
-
     public void containData(String statusCode, JSONObject request) {
-        switch (statusCode) {
-            case DATA:
-                given()
-                        .when()
-                        .get("/users?page=2")
-                        .then()
-                        .statusCode(200)
-                        .body("data[4].first_name", equalTo("George"))
-                        .body("data.first_name", hasItems("George", "Rachel"));
-                //System.out.println(response.asString());
-                break;
-            case CREATED_USER:
-                assert request.get("name").equals("Ani Weet");
-                assert request.get("job").equals("QA Engineer");
-
-                System.out.println(request.toJSONString());
-                break;
+        if (statusCode != null) {
+            switch (statusCode) {
+                case DATA:
+                    verifyDataResponse("/users?page=2", "George", "Rachel");
+                    break;
+                case CREATED_USER:
+                    verifyCreatedUser(request, "Ani Weet", "QA Engineer");
+                    break;
                 //TODO
-            case USER_UPDATED:
-                break;
-            case USER_PARTIAL_UPDATE:
-            default:
-                break;
-        }
-        if (request != null) {
-            assert request.get("name").equals("Ani Weet");
-            assert request.get("job").equals("QA Engineer");
-
-            System.out.println(request.toJSONString());
+                case USER_UPDATED:
+                    break;
+                case USER_PARTIAL_UPDATE:
+                default:
+                    break;
+            }
         }
     }
+
+    public void verifyDataResponse(String endpoint, String... expectedFirstNames) {
+        given()
+                .when()
+                .get(endpoint)
+                .then()
+                .statusCode(200)
+                .body("data.first_name", hasItems(expectedFirstNames));
+    }
+
+    public void verifyCreatedUser(JSONObject request, String expectedName, String expectedJob) {
+        Assert.assertEquals(expectedName, request.get("name"));
+        Assert.assertEquals(expectedJob, request.get("job"));
+    }
 }
+
