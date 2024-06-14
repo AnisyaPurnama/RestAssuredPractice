@@ -1,11 +1,11 @@
-package reqres.api.Pages;
+package reqres.api.Requests;
 
 import org.junit.Test;
 
 import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.when;
 
-public class DeletePages {
+public class Delete {
     @Test
     public void deleteRequest() {
         baseURI = "https://reqres.in";

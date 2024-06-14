@@ -1,8 +1,7 @@
 package reqres.api.StepsDefinitions;
 
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import reqres.api.Pages.CreateUser;
+import reqres.api.Requests.CreateUser;
 
 public class CreateUserSteps {
 

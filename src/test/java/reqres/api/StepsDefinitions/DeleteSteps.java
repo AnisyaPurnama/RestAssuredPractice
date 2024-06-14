@@ -1,15 +1,14 @@
 package reqres.api.StepsDefinitions;
 
 import io.cucumber.java.en.Given;
-import reqres.api.Pages.DeletePages;
-import reqres.api.Pages.ListUser;
+import reqres.api.Requests.Delete;
 
 public class DeleteSteps {
-    private DeletePages deletePages;
+    private Delete delete;
 
     @Given("I send a DELETE request to {string}")
     public void iDelete() {
-        deletePages = new DeletePages();
-        deletePages.deleteRequest();
+        delete = new Delete();
+        delete.deleteRequest();
     }
 }

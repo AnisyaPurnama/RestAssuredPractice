@@ -1,22 +1,21 @@
 package reqres.api.StepsDefinitions;
 
 import io.cucumber.java.en.Given;
-import reqres.api.Pages.RegisterPages;
-import reqres.api.Pages.UpdatePages;
+import reqres.api.Requests.Update;
 
 public class UpdateSteps {
-    private UpdatePages updatePages;
+    private Update update;
 
     @Given("I send a PUT request to {string} with the following data:")
     public void iSendAPUTRequest() {
-        updatePages = new UpdatePages();
-        updatePages.putUpdateUser();
+        update = new Update();
+        update.putUpdateUser();
 
     }
 
     @Given("I send a PATCH request to {string} with the following data:")
     public void iSendAPATCHRequest() {
-        updatePages = new UpdatePages();
-        updatePages.patchUpdateUser();
+        update = new Update();
+        update.patchUpdateUser();
     }
 }

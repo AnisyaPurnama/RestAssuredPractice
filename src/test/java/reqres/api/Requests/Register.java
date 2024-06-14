@@ -1,4 +1,4 @@
-package reqres.api.Pages;
+package reqres.api.Requests;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -12,21 +12,21 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
 
-public class LoginPages {
+public class Register {
     ResponseValidator responseValidator = new ResponseValidator();
     @Before
-    public void toLoginPage() {
-        baseURI="https://reqres.in/api/login";
+    public void toRegistrationPage() {
+        baseURI="https://reqres.in/api/register";
     }
 
     @Test
-    public void enterValidUsername() {
+    public void enterValidDetails() {
         Map<String, Object> map = new HashMap<String, Object>();
         JSONObject request = new JSONObject();
         request.put("email", "eve.holt@reqres.in");
-        //request.put ("password", "pistol");
+        request.put ("password", "pistol");
         System.out.println(request.toJSONString());
         baseURI="https://reqres.in/api";
 
@@ -34,35 +34,23 @@ public class LoginPages {
                 .header("Content-Type", "application/json")
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/login");
+                .post("/register");
+        validateUserRegistered(response);
     }
 
-    public void enterValidPassword() {
-        Map<String, Object> map = new HashMap<String, Object>();
-        JSONObject request = new JSONObject();
-        request.put ("password", "cityslicka");
-        System.out.println(request.toJSONString());
-        baseURI="https://reqres.in/api";
-
-        Response response = given().body(request.toJSONString())
-                .header("Content-Type", "application/json")
-                .contentType(ContentType.JSON)
-                .when()
-                .post("/login");
-        validateLoggedIn(response);
-    }
-
-    public void validateLoggedIn(Response response) {
+    public void validateUserRegistered(Response response) {
         response.then()
                 .statusCode(200)
+                .body("id", equalTo(4))
                 .body("token", equalTo("QpwL5tke4Pnpja7X4"))
                 .log().all();
     }
 
-    public void enterInvalidUsername() {
+    @Test
+    public void enterInvalidDetails() {
         Map<String, Object> map = new HashMap<String, Object>();
         JSONObject request = new JSONObject();
-        request.put ("email", "peter@klaven");
+        request.put("email", "sydney@fife");
         System.out.println(request.toJSONString());
         baseURI="https://reqres.in/api";
 
@@ -70,7 +58,7 @@ public class LoginPages {
                 .header("Content-Type", "application/json")
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/login");
+                .post("/register");
         responseValidator.errorMessage(response);
     }
 }

@@ -1,4 +1,4 @@
-package reqres.api.Pages;
+package reqres.api.Requests;
 
 import io.restassured.http.ContentType;
 import org.json.simple.JSONObject;
@@ -7,7 +7,7 @@ import org.junit.Test;
 import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
 
-public class UpdatePages {
+public class Update {
     @Test
     public void putUpdateUser() {
         JSONObject request = new JSONObject();

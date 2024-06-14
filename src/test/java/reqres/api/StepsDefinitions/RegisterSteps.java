@@ -4,36 +4,36 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
-import reqres.api.Pages.RegisterPages;
+import reqres.api.Requests.Register;
 import reqres.api.Utilities.ResponseValidator;
 
 public class RegisterSteps {
     private Response response;
 
-    private RegisterPages registerPages;
+    private Register register;
 
     @Given("the user is on the registration page")
     public void registrationPage() {
-        registerPages = new RegisterPages();
-        registerPages.toRegistrationPage();
+        register = new Register();
+        register.toRegistrationPage();
     }
 
     @When("the user enters valid registration details")
     public void entersValidRegistrationDetails() {
-        registerPages = new RegisterPages();
-        registerPages.enterValidDetails();
+        register = new Register();
+        register.enterValidDetails();
     }
 
     @Then("the user should be successfully registered")
     public void successfullyRegistered() {
-        registerPages = new RegisterPages();
-        registerPages.validateUserRegistered(response);
+        register = new Register();
+        register.validateUserRegistered(response);
     }
 
     @When("the user enters invalid registration details")
     public void entersInvalidRegistrationDetails() {
-        registerPages = new RegisterPages();
-        registerPages.enterInvalidDetails();
+        register = new Register();
+        register.enterInvalidDetails();
     }
 
     @Then("an error message should display")

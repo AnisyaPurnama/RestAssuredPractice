@@ -1,4 +1,4 @@
-package reqres.api.Pages;
+package reqres.api.Requests;
 
 import org.json.simple.JSONObject;
 import org.junit.Test;
