@@ -23,3 +23,21 @@ jobs:
           cache: maven
       - name: Test Reqres Api Code
         run: mvn -B test -Dtest=reqres.api.*
+          - name: Upload artifact
+            uses: actions/upload-artifact@v2
+            with:
+              name: my-artifact
+              path: path/to/artifact
+
+          - name: Download artifact
+            uses: actions/download-artifact@v2
+            with:
+            - name: my-artifact
+              path: path/to/download/location
+                      - name: Test Report
+                      uses: phoenix-actions/test-reporting@v8
+                      if: success() || failure() # run this step even if previous step failed
+                      with:
+                        name: JEST Tests # Name of the check run which will be created
+                        path: reports/jest-*.xml # Path to test results
+                        reporter: jest-junit # Format of test results

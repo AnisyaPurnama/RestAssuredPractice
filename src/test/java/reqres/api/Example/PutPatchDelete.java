@@ -1,4 +1,4 @@
-package reqres.api;
+package reqres.api.Example;
 
 import io.restassured.http.ContentType;
 import org.json.simple.JSONObject;

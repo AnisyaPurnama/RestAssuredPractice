@@ -1,4 +1,4 @@
-package reqres.api;
+package reqres.api.Example;
 
 import static io.restassured.RestAssured.*; //instead of import io.restassured.RestAssured;
 import static io.restassured.matcher.RestAssuredMatchers.*;
